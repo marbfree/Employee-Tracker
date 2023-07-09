@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs/promises');
+// const prompts = require('prompts.js');
+
 
 const questions = [
     {
@@ -13,6 +15,9 @@ const questions = [
 function init() {
     inquirer.prompt(questions)
     .then((answers) => {
+        if(answers.action === "View All Departments") {
+            viewDept();
+        }
         console.log(answers)
     })
 }

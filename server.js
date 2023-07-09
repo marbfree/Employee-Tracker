@@ -12,14 +12,10 @@ const db = mysql.createConnection(
         host: 'localhost', 
         user: 'root', 
         password: '', 
-        database: 'books_db'
+        database: 'employee_db'
     },
     console.log('Connected to the employee_db database.')
 );
-
-db.query('SELECT name FROM department', function (err, results) {
-    console.log(results);
-});
 
 app.use((req, res) => {
     res.status(404).end();
