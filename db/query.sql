@@ -1,8 +1,8 @@
--- shows department table
+-- shows department table after prompted
 SELECT * FROM department
--- shows role table
+-- shows role table after prompted
 SELECT * FROM role
--- shows combined department, employees, and role tables
+-- shows combined department, employees, and role tables after prompted
 SELECT * FROM employees JOIN role ON employees.role_id = role.id JOIN department ON
 department.id = role.department_id;
 
