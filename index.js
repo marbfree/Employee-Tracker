@@ -1,7 +1,8 @@
 // import inquirer
 const inquirer = require('inquirer');
 // import file systems (do i need this or what is promises and what do?)
-const fs = require('fs/promises');
+const mysql = require('mysql2');
+
 
 // prompts for action on database
 const questions = [
@@ -13,27 +14,59 @@ const questions = [
     }
 ]
 
+
+
+const db = mysql.createConnection(
+    {
+        host: 'localhost', 
+        user: 'root', 
+        password: '', 
+        database: 'employee_db'
+    },
+    console.log('Connected to the employee_db database.')
+);
+
 // initiates the prompts then shows table for each prompt
 function init() {
     inquirer.prompt(questions)
     .then((answers) => {
         // create table for answer
-        // if(answers.list === "View All Departments") {
-        //     viewDept();
-        // }
-        console.log(answers)
+        if(answers.Select === "View All Departments") {
+            viewDept();
+        }
+        if(answers.Select === "Add A Department") {}
+            addDept();
     })
 }
 
 
 function viewDept() {
     let query = "SELECT * FROM department"
-    // connection.query(query, function(err, res) {
-    //     if (err) throw err;
-        console.log(query);
-    // })
+    db.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        init();
+    })    
 }
 
+function addDept() {
+    inquirer.prompt([
+    { type: 'input', 
+      name: 'department',
+      message: 'Enter the name of the new department'
+    }
+    ])
+    .then((answers) => {
+        let query = `INSERT INTO department (name)
+        VALUES ("${answers.department}")`
+        db.query(query, function(err, res) {
+            if (err) throw err;
+            console.log('Success!');
+            init();
+        })    
+    })
+    
+}
 init();
 
 // when "view all departments" is selected, the function "viewDept" creates table
