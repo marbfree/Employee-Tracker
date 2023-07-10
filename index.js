@@ -7,13 +7,13 @@ const fs = require('fs/promises');
 const questions = [
     {
         type: 'list', 
-        name: 'View All',
+        name: 'Select',
         message: 'What would you like to do?',
         choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add a Role', 'Add an Employee', 'Update An Employee Role']
     }
 ]
 
-// initiates the prompts
+// initiates the prompts then shows table for each prompt
 function init() {
     inquirer.prompt(questions)
     .then((answers) => {
@@ -25,4 +25,15 @@ function init() {
     })
 }
 
+
+function viewDept() {
+    let query = "SELECT * FROM department"
+    // connection.query(query, function(err, res) {
+    //     if (err) throw err;
+        console.log(query);
+    // })
+}
+
 init();
+
+// when "view all departments" is selected, the function "viewDept" creates table
