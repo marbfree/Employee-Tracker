@@ -14,8 +14,6 @@ const questions = [
     }
 ]
 
-
-
 const db = mysql.createConnection(
     {
         host: 'localhost', 
@@ -33,9 +31,11 @@ function init() {
         // create table for answer
         if(answers.Select === "View All Departments") {
             viewDept();
+            return;
         }
         if(answers.Select === "Add A Department") {}
             addDept();
+            return;
     })
 }
 
@@ -64,8 +64,7 @@ function addDept() {
             console.log('Success!');
             init();
         })    
-    })
-    
+    })   
 }
 init();
 
