@@ -10,7 +10,7 @@ const questions = [
         type: 'list',
         name: 'Select',
         message: 'What would you like to do?',
-        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add a Role', 'Add an Employee', 'Update An Employee Role']
+        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role']
     }
 ]
 
@@ -45,8 +45,12 @@ function init() {
                 addDept();
                 return;
             }
-            if (answers.Select === "Add a Role") {
+            if (answers.Select === "Add A Role") {
                 addRole();
+                return;
+            }
+            if (answers.Select === "Add An Employee") {
+                addEmployee();
                 return;
             }
         })
@@ -104,7 +108,7 @@ function addRole() {
         {
             type: 'input',
             name: 'title',
-            message:"Enter the title of the new role."
+            message: "Enter the title of the new role."
         },
         {
             type: 'input',
@@ -123,8 +127,42 @@ function addRole() {
                 if (err) throw err;
                 console.log('Success!');
                 init();
-    })});
+            })
+        })
+}
+
+function addEmployee() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: "Enter the first name of the new employee."
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: "Enter the last name of the new employee."
+        },
+        {
+            type: 'input',
+            name: 'role_id',
+            message: "Enter the role id of the new employee."
+        },
+        {
+            type: 'input',
+            name: 'manager_id',
+            message: "Enter the manager id of the new employee."
+        }
+    ])
+        .then((answers) => {
+            let query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${answers.first_name}", "${answers.last_name}", ${answers.role_id}, ${answers.manager_id})`
+            db.query(query, function (err, res) {
+                if (err) throw err;
+                // console.log(answers);
+                console.log('Success!');
+                init();
+            })
+        })
 }
 init();
 
-// when "view all departments" is selected, the function "viewDept" creates table
