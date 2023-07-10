@@ -118,31 +118,12 @@ function addRole() {
         }
     ])
         .then((answers) => {
-            let query = `INSERT INTO role (title, salary, department_id) VALUES ("${answers.title, answers.salary, answers.department_id}")`
+            let query = `INSERT INTO role (title, salary, department_id) VALUES ("${answers.title}", ${answers.salary}, ${answers.department_id})`
             db.query(query, function (err, res) {
                 if (err) throw err;
                 console.log('Success!');
-            
-            // let query2 = `INSERT INTO role (salary) VALUES ("${answers.salary}")`
-            // db.query(query2, function (err, res) {
-            //     if (err) throw err;
-            //     console.log('Success!');
-            // })
+                init();
     })});
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'roleSalary',
-//             message: 'Enter the salary for the new role.'  
-//         }
-//     ])
-//         .then((answers) => {
-//             let query = `INSERT INTO role (salary) VALUES("${answers.roleSaoary}")`
-//             db.query(query, function (err, res) {
-//                 if (err) throw err;
-//                 console.log('Success!');
-//             })
-//         })
 }
 init();
 
