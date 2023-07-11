@@ -92,7 +92,7 @@ function viewRoles() {
 }
 
 function viewEmployee() {
-    let query = "SELECT * FROM employee JOIN role ON employee.role_id = role.id JOIN department ON department.id = role.department_id"
+    let query = "SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id"
     db.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -240,7 +240,21 @@ function deleteRole() {
 }
 
 function deleteEmployee() {
-    inquirer.prompt()
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'deleteEmployee',
+            message: "Enter the employee id to delete."
+        }
+    ])
+    .then((answers) => {
+        let query = `DELETE FROM employee WHERE id = ${answers.deleteEmployee}`
+        db.query(query, function (err, res) {
+            if (err) throw err;
+            console.log('Success!');
+            init();
+        })
+    })
 }
 
 init();
