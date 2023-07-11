@@ -10,7 +10,7 @@ const questions = [
         type: 'list',
         name: 'Select',
         message: 'What would you like to do?',
-        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role']
+        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Delete A Department', 'Delete A Role', 'Delete An Employee']
     }
 ]
 
@@ -51,6 +51,22 @@ function init() {
             }
             if (answers.Select === "Add An Employee") {
                 addEmployee();
+                return;
+            }
+            if (answers.Select === "Update An Employee Role") {
+                updateRole();
+                return;
+            } 
+            if (answers.Select === "Delete A Department") {
+                deleteDept();
+                return;
+            }
+            if (answers.Select === "Delete A Role") {
+                deleteRole();
+                return;
+            }
+            if (answers.Select === "Delete An Employee") {
+                deleteEmployee();
                 return;
             }
         })
@@ -158,11 +174,74 @@ function addEmployee() {
             let query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${answers.first_name}", "${answers.last_name}", ${answers.role_id}, ${answers.manager_id})`
             db.query(query, function (err, res) {
                 if (err) throw err;
-                // console.log(answers);
                 console.log('Success!');
                 init();
             })
         })
 }
+
+function updateRole() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employee_id',
+            message: "Enter the employee id to update their role."
+        },
+        {
+            type: 'input',
+            name: 'role_id',
+            message: "Enter the Employee's new Role Id."
+        }
+    ])
+        .then((answers) => {
+            let query = `UPDATE employee SET role_id = ${answers.role_id} WHERE id = ${answers.employee_id}`
+            db.query(query, function (err, res) {
+                if (err) throw err;
+                console.log('Success!');
+                init();
+            })
+        })
+}
+
+function deleteDept() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'deleteDept',
+            message: "Enter a department id to delete."
+        }
+    ])
+        .then((answers) => {
+            let query = `DELETE FROM department WHERE id = ${answers.deleteDept}`
+            db.query(query, function (err, res) {
+                if (err) throw err;
+                console.log('Success!');
+                init();
+            })
+        })
+}
+
+function deleteRole() {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'deleteRole',
+            message: "Enter a role id to delete."
+        }
+    ])
+    .then((answers) => {
+        let query = `DELETE FROM role WHERE id = ${answers.deleteRole}`
+        db.query(query, function (err, res) {
+            if (err) throw err;
+            console.log('Success!');
+            init();
+        })
+    })
+}
+
+function deleteEmployee() {
+    inquirer.prompt()
+}
+
 init();
 
