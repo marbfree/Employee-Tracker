@@ -1,3 +1,4 @@
+-- Dummy Data
 INSERT INTO department (name)
 VALUES ("Sales"),
        ("Teaching"),

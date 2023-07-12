@@ -14,6 +14,7 @@ const questions = [
     }
 ]
 
+// creates a connection to database
 const db = mysql.createConnection(
     {
         host: 'localhost',
@@ -28,7 +29,6 @@ const db = mysql.createConnection(
 function init() {
     inquirer.prompt(questions)
         .then((answers) => {
-            // create table for answer
             if (answers.Select === "View All Departments") {
                 viewDept();
                 return;
@@ -72,7 +72,7 @@ function init() {
         })
 }
 
-
+// View the Department Table
 function viewDept() {
     let query = "SELECT * FROM department"
     db.query(query, function (err, res) {
@@ -82,8 +82,9 @@ function viewDept() {
     })
 }
 
+// View the Role Table
 function viewRoles() {
-    let query = "SELECT role.id, role.title, role.salary, department.name AS department FROM role JOIN department ON department_id = department.id"
+    let query = "SELECT role.id, role.title, role.salary, department.name AS department FROM role LEFT JOIN department ON department_id = department.id"
     db.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);
@@ -91,6 +92,7 @@ function viewRoles() {
     })
 }
 
+// View the Employees with department and role included
 function viewEmployee() {
     let query = "SELECT employee.id, employee.first_name AS first, employee.last_name AS last, employee.manager_id AS manager, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id"
     db.query(query, function (err, res) {
@@ -100,6 +102,7 @@ function viewEmployee() {
     })
 }
 
+// Adds a new department
 function addDept() {
     inquirer.prompt([
         {
@@ -119,6 +122,7 @@ function addDept() {
         })
 }
 
+// Adds a new role
 function addRole() {
     inquirer.prompt([
         {
@@ -147,6 +151,7 @@ function addRole() {
         })
 }
 
+// To add an employee
 function addEmployee() {
     inquirer.prompt([
         {
@@ -180,6 +185,7 @@ function addEmployee() {
         })
 }
 
+// Update an existing role 
 function updateRole() {
     inquirer.prompt([
         {
@@ -203,6 +209,7 @@ function updateRole() {
         })
 }
 
+// deletes a department by id
 function deleteDept() {
     inquirer.prompt([
         {
@@ -221,6 +228,7 @@ function deleteDept() {
         })
 }
 
+// deletes a role by id
 function deleteRole() {
     inquirer.prompt([
         {
@@ -239,6 +247,7 @@ function deleteRole() {
     })
 }
 
+// deletes an employee by id
 function deleteEmployee() {
     inquirer.prompt([
         {
