@@ -74,7 +74,7 @@ function init() {
 
 // View the Department Table
 function viewDept() {
-    let query = "SELECT * FROM department"
+    let query = "SELECT department.id, department.name AS department FROM department"
     db.query(query, function (err, res) {
         if (err) throw err;
         console.table(res);

@@ -7,7 +7,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,6 @@
     "url": "https://github.com/marbfree/Employee-Tracker/issues"
   },
   "homepage": "https://github.com/marbfree/Employee-Tracker#readme",
-  "description": ""
+  "description": "![alt text](https://img.shields.io/badge/license-mit-blue) # Employee Tracker  ## Description    As a business owner, I want to be able to view and manage departments, roles, and employees in my company so that I can organize and plan my business. ## Table of Contents [Installation](#installation)",
+  "devDependencies": {}
 }

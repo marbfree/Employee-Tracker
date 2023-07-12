@@ -16,20 +16,23 @@
 [Questions](#questions)
 
 ## Installation 
-  Clone repo, run npm init, then use the terminal to run npm install, to install packages.  Then run the command node index.js to follow the prompts.
+  Clone repo, run npm init, then use the terminal to run npm install, to install packages.  Once packages are installed, then change folder to db and run mysql -u root.  Once in mysql, run source schema.sql.  Run source seeds.sql for dummy data.  Quit mysql and cd .. to return to root folder.  Then run the command node server.js to run the program.
 
 ## Usage 
-  Packages used are inquirer and  mysql2.  Run npm i in the command line to install packages.  Then, run the command node index.js and follow the prompts to view or change employees roles or to add/delete a department, for example.
+  To run prompts, run the command node server.js and using the up and down arrows, select an option to view a table or to hange employees' roles or to add/delete a department, for example.
 
 Clone the repo here: 
 https://github.com/marbfree/Employee-Tracker
+
+Watch a tutorial here:
+https://watch.screencastify.com/v/0EbI2RWUr1LomIA9vldo
 
 ![alt text](./assests/Prompt.png)
 
 ![alt text](./assests/Tables.png)
 
 ## Credits 
-  Thank you to the ASKBCS team, Tyler and Rudie, for your help in line 95 of index.js.  Thank you to my tutor, Benicio for guiding me to the next steps on how to attach the prompts to the output.
+  Thank you to the ASKBCS team, Tyler and Rudie, for your help in line 95 of server.js.  Thank you to my tutor, Benicio for guiding me to the next steps on how to attach the prompts to the output.
 ## License
   mit
       [License](https://choosealicense.com/licenses/mit/)
